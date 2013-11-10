@@ -30,6 +30,7 @@
     <ProjectGuid>{A3C0D9FE-F4A3-45F9-874A-AC2E6806477C}</ProjectGuid>
     <RootNamespace>vJoyClient</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <ProjectName>LM-vJoyClient</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Rel64|Win32'" Label="Configuration">
@@ -260,7 +261,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="vJoyClient.cpp" />
+    <ClCompile Include="LM-vJoyClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\inc\public.h" />
