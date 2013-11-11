@@ -1,16 +1,56 @@
-﻿Build started 11/10/2013 12:44:08 AM.
+﻿Build started 11/11/2013 3:04:52 PM.
      1>Project "C:\Users\Abyssul\Documents\GitHub\Leap-Motion-vJoy-Wrapper\Wrapper Project\vJoyClient.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
-         E:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I..\inc /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt vJoyClient.cpp
-         vJoyClient.cpp
-     1>vJoyClient.cpp(21): warning C4101: 'iReport' : unreferenced local variable
+         E:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I..\inc /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Leap.cpp "LM-vJoyClient.cpp"
+         Leap.cpp
+         LM-vJoyClient.cpp
+     1>LM-vJoyClient.cpp(22): warning C4101: 'Z' : unreferenced local variable
+     1>LM-vJoyClient.cpp(23): warning C4101: 'iReport' : unreferenced local variable
+     1>LM-vJoyClient.cpp(22): warning C4101: 'ZR' : unreferenced local variable
+     1>LM-vJoyClient.cpp(22): warning C4101: 'XR' : unreferenced local variable
+     1>LM-vJoyClient.cpp(22): warning C4101: 'Y' : unreferenced local variable
+     1>LM-vJoyClient.cpp(22): warning C4101: 'X' : unreferenced local variable
        Link:
-         E:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Abyssul\Documents\GitHub\Leap-Motion-vJoy-Wrapper\Wrapper Project\Release\vJoyClient.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:..\lib Setupapi.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Abyssul\Documents\GitHub\Leap-Motion-vJoy-Wrapper\Wrapper Project\Release\vJoyClient.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Abyssul\Documents\GitHub\Leap-Motion-vJoy-Wrapper\Wrapper Project\Release\vJoyClient.lib" /MACHINE:X86 /SAFESEH Release\vJoyClient.obj
-         Generating code
-         Finished generating code
-         vJoyClient.vcxproj -> C:\Users\Abyssul\Documents\GitHub\Leap-Motion-vJoy-Wrapper\Wrapper Project\Release\vJoyClient.exe
-     1>Done Building Project "C:\Users\Abyssul\Documents\GitHub\Leap-Motion-vJoy-Wrapper\Wrapper Project\vJoyClient.vcxproj" (Rebuild target(s)).
+         E:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Abyssul\Documents\GitHub\Leap-Motion-vJoy-Wrapper\Wrapper Project\Release\LM-vJoyClient.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:..\lib Setupapi.lib Leap.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Abyssul\Documents\GitHub\Leap-Motion-vJoy-Wrapper\Wrapper Project\Release\LM-vJoyClient.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Abyssul\Documents\GitHub\Leap-Motion-vJoy-Wrapper\Wrapper Project\Release\LM-vJoyClient.lib" /MACHINE:X86 /SAFESEH Release\Leap.obj
+         "Release\LM-vJoyClient.obj"
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: __thiscall Leap::SwipeGesture::SwipeGesture(class Leap::Gesture const &)" (__imp_??0SwipeGesture@Leap@@QAE@ABVGesture@1@@Z)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: __thiscall Leap::KeyTapGesture::KeyTapGesture(class Leap::Gesture const &)" (__imp_??0KeyTapGesture@Leap@@QAE@ABVGesture@1@@Z)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: int __thiscall Leap::Gesture::id(void)const " (__imp_?id@Gesture@Leap@@QBEHXZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: enum Leap::Gesture::State __thiscall Leap::Gesture::state(void)const " (__imp_?state@Gesture@Leap@@QBE?AW4State@12@XZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: enum Leap::Gesture::Type __thiscall Leap::Gesture::type(void)const " (__imp_?type@Gesture@Leap@@QBE?AW4Type@12@XZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: class Leap::Gesture __thiscall Leap::GestureList::operator[](int)const " (__imp_??AGestureList@Leap@@QBE?AVGesture@1@H@Z)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: bool __thiscall Leap::GestureList::isEmpty(void)const " (__imp_?isEmpty@GestureList@Leap@@QBE_NXZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: int __thiscall Leap::GestureList::count(void)const " (__imp_?count@GestureList@Leap@@QBEHXZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: class Leap::Finger __thiscall Leap::FingerList::operator[](int)const " (__imp_??AFingerList@Leap@@QBE?AVFinger@1@H@Z)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: bool __thiscall Leap::FingerList::isEmpty(void)const " (__imp_?isEmpty@FingerList@Leap@@QBE_NXZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: int __thiscall Leap::FingerList::count(void)const " (__imp_?count@FingerList@Leap@@QBEHXZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: class Leap::GestureList __thiscall Leap::Frame::gestures(void)const " (__imp_?gestures@Frame@Leap@@QBE?AVGestureList@2@XZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: class Leap::Gesture __thiscall Leap::Frame::gesture(int)const " (__imp_?gesture@Frame@Leap@@QBE?AVGesture@2@H@Z)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: class Leap::HandList __thiscall Leap::Frame::hands(void)const " (__imp_?hands@Frame@Leap@@QBE?AVHandList@2@XZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: void __thiscall Leap::Controller::enableGesture(enum Leap::Gesture::Type,bool)const " (__imp_?enableGesture@Controller@Leap@@QBEXW4Type@Gesture@2@_N@Z)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: class Leap::Frame __thiscall Leap::Controller::frame(int)const " (__imp_?frame@Controller@Leap@@QBE?AVFrame@2@H@Z)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: struct Leap::Vector __thiscall Leap::Pointable::direction(void)const " (__imp_?direction@Pointable@Leap@@QBE?AUVector@2@XZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: struct Leap::Vector __thiscall Leap::Pointable::tipPosition(void)const " (__imp_?tipPosition@Pointable@Leap@@QBE?AUVector@2@XZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: __thiscall Leap::ScreenTapGesture::ScreenTapGesture(class Leap::Gesture const &)" (__imp_??0ScreenTapGesture@Leap@@QAE@ABVGesture@1@@Z)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: struct Leap::Vector __thiscall Leap::Hand::direction(void)const " (__imp_?direction@Hand@Leap@@QBE?AUVector@2@XZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: struct Leap::Vector __thiscall Leap::Hand::palmNormal(void)const " (__imp_?palmNormal@Hand@Leap@@QBE?AUVector@2@XZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: class Leap::FingerList __thiscall Leap::Hand::fingers(void)const " (__imp_?fingers@Hand@Leap@@QBE?AVFingerList@2@XZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: class Leap::Pointable __thiscall Leap::CircleGesture::pointable(void)const " (__imp_?pointable@CircleGesture@Leap@@QBE?AVPointable@2@XZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: float __thiscall Leap::CircleGesture::progress(void)const " (__imp_?progress@CircleGesture@Leap@@QBEMXZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: struct Leap::Vector __thiscall Leap::CircleGesture::normal(void)const " (__imp_?normal@CircleGesture@Leap@@QBE?AUVector@2@XZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: __thiscall Leap::CircleGesture::CircleGesture(class Leap::Gesture const &)" (__imp_??0CircleGesture@Leap@@QAE@ABVGesture@1@@Z)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) protected: virtual __thiscall Leap::Interface::~Interface(void)" (__imp_??1Interface@Leap@@MAE@XZ)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: class Leap::Hand __thiscall Leap::HandList::operator[](int)const " (__imp_??AHandList@Leap@@QBE?AVHand@1@H@Z)
+     1>Leap.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: bool __thiscall Leap::HandList::isEmpty(void)const " (__imp_?isEmpty@HandList@Leap@@QBE_NXZ)
+     1>LM-vJoyClient.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: bool __thiscall Leap::Controller::removeListener(class Leap::Listener &)" (__imp_?removeListener@Controller@Leap@@QAE_NAAVListener@2@@Z)
+     1>LM-vJoyClient.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: bool __thiscall Leap::Controller::addListener(class Leap::Listener &)" (__imp_?addListener@Controller@Leap@@QAE_NAAVListener@2@@Z)
+     1>LM-vJoyClient.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: virtual __thiscall Leap::Controller::~Controller(void)" (__imp_??1Controller@Leap@@UAE@XZ)
+     1>LM-vJoyClient.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: __thiscall Leap::Controller::Controller(void)" (__imp_??0Controller@Leap@@QAE@XZ)
+     1>LM-vJoyClient.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: virtual __thiscall Leap::Listener::~Listener(void)" (__imp_??1Listener@Leap@@UAE@XZ)
+     1>LM-vJoyClient.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: __thiscall Leap::Listener::Listener(void)" (__imp_??0Listener@Leap@@QAE@XZ)
+     1>C:\Users\Abyssul\Documents\GitHub\Leap-Motion-vJoy-Wrapper\Wrapper Project\Release\LM-vJoyClient.exe : fatal error LNK1120: 35 unresolved externals
+     1>Done Building Project "C:\Users\Abyssul\Documents\GitHub\Leap-Motion-vJoy-Wrapper\Wrapper Project\vJoyClient.vcxproj" (Rebuild target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:00.76
+Time Elapsed 00:00:01.39

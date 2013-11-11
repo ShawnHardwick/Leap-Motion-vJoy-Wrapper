@@ -3,14 +3,15 @@
 // Supports both types of POV Hats
 
 #include "stdafx.h"
-#include "inc\public.h"
-#include "inc\vjoyinterface.h"
+#include "inc/public.h"
+#include "inc/vjoyinterface.h"
 #include <malloc.h>
 #include <string.h>
 #include <stdlib.h>
-#include "inc\Leap.h"
+#include "inc/Leap.h"
 
 #pragma comment( lib, "VJOYINTERFACE" )
+
 #define  _CRT_SECURE_NO_WARNINGS
 
 int
@@ -98,21 +99,20 @@ _tmain(__in int argc, __in PZPWSTR argv)
 		_tprintf("Acquired: vJoy device number %d.\n", iInterface);
 	}
 
-
-
-	_tprintf("\npress enter to stat feeding");
-	getchar();
-
-	X = 20;
-	Y = 30;
-	Z = 40;
-	XR = 60;
-	ZR = 80;
-
-	long value = 0;
-	BOOL res = FALSE;
-
 	/* Insert Leap Motion logic here*/
+	Leap::Listener listener;
+	Leap::Controller controller;
+
+	// Have the sample listener receive events from the controller
+	controller.addListener(listener);
+
+	// Keep this process running until Enter is pressed
+	std::cout << "Press Enter to quit..." << std::endl;
+	std::cin.get();
+
+	// Remove the sample listener when done
+	controller.removeListener(listener);
+	
 
 /* Previous test code (use for reference)
 	// Reset this device to default values
