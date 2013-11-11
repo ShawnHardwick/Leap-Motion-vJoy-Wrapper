@@ -92,23 +92,28 @@ _tmain(__in int argc, __in PZPWSTR argv){
 		_tprintf("Acquired: vJoy device number %d.\n", iInterface);
 	}
 
-
-
-	_tprintf("\npress enter to start feeding\n");
-	getchar();
-
-	X = 20;
-	Y = 30;
-	Z = 40;
-	XR = 60;
-	ZR = 80;
-
 	long value = 0;
 	BOOL res = FALSE;
 
-  // Keep this process running until Enter is pressed
-  std::cout << "Press Enter to quit..." << std::endl;
-  std::cin.get();
+  //// Keep this process running until Enter is pressed
+  //std::cout << "Press Enter to quit..." << std::endl;
+  //std::cin.get();
+
+  // Reset this device to default values
+	ResetVJD(iInterface);
+	while(1)
+	{
+		const Frame frame = controller.frame();
+		if (!frame.hands().isEmpty()) {
+			const Hand hand = frame.hands()[0];
+			const FingerList fingers = hand.fingers();
+			if (!fingers.isEmpty()) {
+
+				SetAxis(((fingers.count()) * 10), iInterface, HID_USAGE_X);
+				SetBtn(TRUE, iInterface, fingers.count());
+			}
+		}
+	}
 
   // Remove the sample listener when done
   controller.removeListener(listener);
