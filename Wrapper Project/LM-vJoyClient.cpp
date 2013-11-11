@@ -7,11 +7,17 @@
 \******************************************************************************/
 
 #include <iostream>
-#include "Leap.h"
+#include "stdafx.h"
+#include "public.h"
+#include <malloc.h>
+#include <string.h>
+#include <stdlib.h>
 #include "LeapListener.h"
 using namespace Leap;
 
-int main() {
+int
+__cdecl
+_tmain(__in int argc, __in PZPWSTR argv){
   // Create a sample listener and controller
   SampleListener listener;
   Controller controller;
