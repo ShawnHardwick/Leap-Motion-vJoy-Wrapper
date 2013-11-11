@@ -26,6 +26,7 @@ _tmain(__in int argc, __in PZPWSTR argv){
 
   // Have the sample listener receive events from the controller
   controller.addListener(listener);
+  controller.setPolicyFlags(Controller::PolicyFlag::POLICY_BACKGROUND_FRAMES); //Allows background frame tracking when application is out of focus
 
   USHORT X, Y, Z, ZR, XR;							// Position of several axes
 	JOYSTICK_POSITION	iReport;					// The structure that holds the full position data

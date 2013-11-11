@@ -96,11 +96,3 @@ void SampleListener::onFrame(const Controller& controller) {
   }
 
 }
-
-void SampleListener::onFocusGained(const Controller& controller) {
-  std::cout << "Focus Gained" << std::endl;
-}
-
-void SampleListener::onFocusLost(const Controller& controller) {
-  std::cout << "Focus Lost" << std::endl;
-}
