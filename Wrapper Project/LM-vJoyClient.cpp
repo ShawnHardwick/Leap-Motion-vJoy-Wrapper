@@ -108,7 +108,7 @@ _tmain(__in int argc, __in PZPWSTR argv){
 
 
 
-	_tprintf("\npress enter to stat feeding");
+	_tprintf("\npress enter to stat feeding\n");
 	getchar();
 
 	X = 20;
