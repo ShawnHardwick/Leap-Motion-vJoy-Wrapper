@@ -261,10 +261,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Leap.cpp" />
     <ClCompile Include="LM-vJoyClient.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\inc\public.h" />
+    <ClInclude Include="inc\Leap.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="..\inc\vjoyinterface.h" />
   </ItemGroup>
