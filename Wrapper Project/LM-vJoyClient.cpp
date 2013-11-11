@@ -13,7 +13,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include "LeapListener.h"
-#include "vjoyinterface.h"
+#include "vJoyInterface.h"
+
 using namespace Leap;
 
 int
@@ -45,10 +46,6 @@ _tmain(__in int argc, __in PZPWSTR argv){
 		_tprintf("vJoy driver not enabled: Failed Getting vJoy attributes.\n");
 		return -2;
 	}
-	else
-	{
-		_tprintf("Vendor: %S\nProduct :%S\nVersion Number:%S\n", TEXT(GetvJoyManufacturerString()),  TEXT(GetvJoyProductString()), TEXT(GetvJoySerialNumberString()));
-	};
 
 	// Get the state of the requested device
 	VjdStat status = GetVJDStatus(iInterface);
@@ -82,17 +79,6 @@ _tmain(__in int argc, __in PZPWSTR argv){
 	int ContPovNumber = GetVJDContPovNumber(iInterface);
 	int DiscPovNumber = GetVJDDiscPovNumber(iInterface);
 
-	// Print results
-	_tprintf("\nvJoy Device %d capabilities:\n", iInterface);
-	_tprintf("Numner of buttons\t\t%d\n", nButtons);
-	_tprintf("Numner of Continuous POVs\t%d\n", ContPovNumber);
-	_tprintf("Numner of Descrete POVs\t\t%d\n", DiscPovNumber);
-	_tprintf("Axis X\t\t%s\n", AxisX?"Yes":"No");
-	_tprintf("Axis Y\t\t%s\n", AxisX?"Yes":"No");
-	_tprintf("Axis Z\t\t%s\n", AxisX?"Yes":"No");
-	_tprintf("Axis Rx\t\t%s\n", AxisRX?"Yes":"No");
-	_tprintf("Axis Rz\t\t%s\n", AxisRZ?"Yes":"No");
-
 
 
 	// Acquire the target
@@ -108,7 +94,7 @@ _tmain(__in int argc, __in PZPWSTR argv){
 
 
 
-	_tprintf("\npress enter to stat feeding\n");
+	_tprintf("\npress enter to start feeding\n");
 	getchar();
 
 	X = 20;
