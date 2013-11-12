@@ -103,11 +103,11 @@ _tmain(__in int argc, __in PZPWSTR argv){
 			}
 			float rotation = hand.palmNormal().roll();
 			int axisValue;
-			if(rotation < 0){
-				axisValue = rotation * 19516 + 16384;
+			if(rotation > 0){
+				axisValue = 35900 - (rotation * 19516 + 16384);
 			}
-			else if (rotation > 0){
-				axisValue = 16384 + rotation * 16384;
+			else if (rotation < 0){
+				axisValue = (abs(rotation) * 19516 + 16384);
 			}
 			else{ //Hand is center
 				axisValue = 16384;
