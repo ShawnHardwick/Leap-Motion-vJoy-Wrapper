@@ -28,7 +28,6 @@ _tmain(__in int argc, __in PZPWSTR argv){
   controller.addListener(listener);
   controller.setPolicyFlags(Controller::PolicyFlag::POLICY_BACKGROUND_FRAMES); //Allows background frame tracking when application is out of focus
 
-  USHORT X, Y, Z, ZR, XR;							// Position of several axes
 	JOYSTICK_POSITION	iReport;					// The structure that holds the full position data
 	BYTE id=1;										// ID of the target vjoy device (Default is 1)
 	UINT iInterface=1;								// Default target vJoy device
@@ -69,18 +68,6 @@ _tmain(__in int argc, __in PZPWSTR argv){
 		return -1;
 	};
 
-	// Check which axes are supported
-	BOOL AxisX  = GetVJDAxisExist(iInterface, HID_USAGE_X);
-	BOOL AxisY  = GetVJDAxisExist(iInterface, HID_USAGE_Y);
-	BOOL AxisZ  = GetVJDAxisExist(iInterface, HID_USAGE_Z);
-	BOOL AxisRX = GetVJDAxisExist(iInterface, HID_USAGE_RX);
-	BOOL AxisRZ = GetVJDAxisExist(iInterface, HID_USAGE_RZ);
-	// Get the number of buttons and POV Hat switchessupported by this vJoy device
-	int nButtons  = GetVJDButtonNumber(iInterface);
-	int ContPovNumber = GetVJDContPovNumber(iInterface);
-	int DiscPovNumber = GetVJDDiscPovNumber(iInterface);
-
-
 
 	// Acquire the target
 	if ((status == VJD_STAT_OWN) || ((status == VJD_STAT_FREE) && (!AcquireVJD(iInterface))))
@@ -105,18 +92,37 @@ _tmain(__in int argc, __in PZPWSTR argv){
 	while(1)
 	{
 		const Frame frame = controller.frame();
+		const Frame prevFrame = controller.frame(1);
 		if (!frame.hands().isEmpty()) {
 			const Hand hand = frame.hands()[0];
 			const FingerList fingers = hand.fingers();
 			if (!fingers.isEmpty()) {
 
-				SetAxis(((fingers.count()) * 10), iInterface, HID_USAGE_X);
-				SetBtn(TRUE, iInterface, fingers.count());
+				//SetBtn(TRUE, iInterface, fingers.count());
+
 			}
+			float rotation = hand.palmNormal().roll();
+			int axisValue;
+			if(rotation > 0){
+				axisValue = rotation * 19516 + 16384;
+			}
+			else if (rotation < 0){
+				axisValue = 16384 + rotation * 16384;
+			}
+			else{
+				axisValue = 16384;
+			}
+
+			SetAxis(axisValue, iInterface, HID_USAGE_X);
 		}
+		else{
+			SetAxis(16384, iInterface, HID_USAGE_X); //Set axis to neutral if no hand is detected
+		}
+
 	}
 
   // Remove the sample listener when done
+  RelinquishVJD(iInterface);
   controller.removeListener(listener);
 
   return 0;
