@@ -1,4 +1,13 @@
 /******************************************************************************\
+*Red Panda, INC.															   *
+*Founding Members: Shawn Hardwick, Richard Jones                               *
+*Project Title: LeapMotion vJoy Wrapper                                        *
+*CSCI 490                                                                      *
+*Professor: Dr. French                                                         *
+\******************************************************************************/
+
+
+/******************************************************************************\
 * Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.               *
 * Leap Motion proprietary and confidential. Not for distribution.              *
 * Use subject to the terms of the Leap Motion SDK Agreement available at       *
@@ -7,13 +16,14 @@
 \******************************************************************************/
 
 
-
-
 /******************************************************************************\
-* 
-*
-*
-*
+*Copyright (C) 2010-2012 vJoystick. Open source device driver.				   *
+*http://vjoystick.sourceforge.net/site/										   *
+*vJoystick is an open source device driver that will allow the user to use a   *
+*device that is not support by an application. The feeder sample was made and  * 
+*compiled by the maker(s) of vJoystick. They can be contacted at               *
+* http://vjoystick.sourceforge.net/site/index.php/contact-form1.               *
+*All rights remane to vJoystick; if the have any.                              *
 \******************************************************************************/
 
 #include <iostream>
