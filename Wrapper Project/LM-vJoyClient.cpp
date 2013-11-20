@@ -48,6 +48,7 @@ _tmain(__in int argc, __in PZPWSTR argv){
   controller.addListener(listener);
   controller.setPolicyFlags(Controller::PolicyFlag::POLICY_BACKGROUND_FRAMES); //Allows background frame tracking when application is out of focus
 
+	USHORT X;										//Position of Axis
 	JOYSTICK_POSITION	iReport;					// The structure that holds the full position data
 	BYTE id=1;										// ID of the target vjoy device (Default is 1)
 	UINT iInterface=1;								// Default target vJoy device
@@ -106,11 +107,16 @@ _tmain(__in int argc, __in PZPWSTR argv){
   //// Keep this process running until Enter is pressed
   //std::cout << "Press Enter to quit..." << std::endl;
   //std::cin.get();
-
+	X = 0;
   // Reset this device to default values
 	ResetVJD(iInterface);
 	while(1)
 	{
+		//create the data packet that holds all the information
+		id = (BYTE)iInterface;
+		iReport.bDevice = id;
+		iReport.wAxisX=X;
+
 		const Frame frame = controller.frame();
 		const Frame prevFrame = controller.frame(1);
 		if (!frame.hands().isEmpty()) {
@@ -133,25 +139,36 @@ _tmain(__in int argc, __in PZPWSTR argv){
 				axisValue = 16384;
 			}
 			
-			//Count the amount of fingers in FingerList
+			// Sets the X Axis
+			//SetAxis(axisValue, iInterface, HID_USAGE_X);
+			iReport.wAxisX = axisValue;
+
+			//Count the amount of fingers in FingerList to set button
 			//2 or more fingers, Accelerate
-			if(fingers.count() >= 2) {
-				SetBtn(TRUE, iInterface, 1);
-				SetBtn(FALSE, iInterface, 2);
+			int howmanyfingers = fingers.count();
+
+			if(howmanyfingers >= 2) {
+				//SetBtn(TRUE, iInterface, 1);
+				//SetBtn(FALSE, iInterface, 2);
+				iReport.lButtons = 1;
 			}
 			//1 or less fingers, Decelerate
-			else if (fingers.count() <= 1) {
-				SetBtn(TRUE, iInterface, 2);
-				SetBtn(FALSE, iInterface, 1);
+			else if (howmanyfingers <= 1) {
+				//SetBtn(TRUE, iInterface, 2);
+				//SetBtn(FALSE, iInterface, 1);
+				iReport.lButtons = 2;
 			}
-
-			SetAxis(axisValue, iInterface, HID_USAGE_X);
+			
 		}
 		else{
-			SetAxis(16384, iInterface, HID_USAGE_X); //Set axis to neutral if no hand is detected
-			SetBtn(FALSE, iInterface, 1); //Set buttons to false if no hand is detected
-			SetBtn(FALSE, iInterface, 2); //Set buttons to false if no hand is detected
-		}
+			//SetAxis(16384, iInterface, HID_USAGE_X); //Set axis to neutral if no hand is detected
+			//SetBtn(FALSE, iInterface, 1); //Set buttons to false if no hand is detected
+			//SetBtn(FALSE, iInterface, 2); //Set buttons to false if no hand is detected
+			iReport.lButtons = 0;
+			iReport.wAxisX = 16384;
+		} 
+
+		UpdateVJD(iInterface, (PVOID)&iReport); //updates with iReport
 
 	}
 
