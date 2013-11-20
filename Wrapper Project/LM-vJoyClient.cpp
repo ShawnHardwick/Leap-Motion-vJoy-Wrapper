@@ -119,12 +119,9 @@ _tmain(__in int argc, __in PZPWSTR argv){
 			if (!fingers.isEmpty()) {
 
 				//SetBtn(TRUE, iInterface, fingers.count());
-
 			}
 			float rotation = hand.palmNormal().roll();
-			//calculates the diameter of sphere in the palm of the hand
-			float sphereDiameter = 2 * hand.sphereRadius();
-
+	
 			int axisValue;
 			if(rotation > 0){
 				axisValue = 35900 - (rotation * 19516 + 16384);
@@ -135,29 +132,25 @@ _tmain(__in int argc, __in PZPWSTR argv){
 			else{ //Hand is center
 				axisValue = 16384;
 			}
-
-			//set buttons depending on size of sphere
-			//hand to has to be slightly curved in order for sphere to be recognized
-			//current threshold:
-			//Acceleration Button 1: diamater >= 150
-			//Deceleration Button 2: diamater <= 130
-			if(sphereDiameter >= 150){
+			
+			//Count the amount of fingers in FingerList
+			//2 or more fingers, Accelerate
+			if(fingers.count() >= 2) {
 				SetBtn(TRUE, iInterface, 1);
 				SetBtn(FALSE, iInterface, 2);
 			}
-			else if (sphereDiameter <= 130) {
+			//1 or less fingers, Decelerate
+			else if (fingers.count() <= 1) {
 				SetBtn(TRUE, iInterface, 2);
 				SetBtn(FALSE, iInterface, 1);
 			}
-			else {
-				
-			}
 
-			
 			SetAxis(axisValue, iInterface, HID_USAGE_X);
 		}
 		else{
 			SetAxis(16384, iInterface, HID_USAGE_X); //Set axis to neutral if no hand is detected
+			SetBtn(FALSE, iInterface, 1); //Set buttons to false if no hand is detected
+			SetBtn(FALSE, iInterface, 2); //Set buttons to false if no hand is detected
 		}
 
 	}

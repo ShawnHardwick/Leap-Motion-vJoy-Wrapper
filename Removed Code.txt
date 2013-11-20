@@ -1,0 +1,21 @@
+//Here lies code that did not make the cut into the final project
+
+
+	//set buttons depending on size of sphere
+	//hand to has to be slightly curved in order for sphere to be recognized
+	//current threshold:
+	//Acceleration Button 1: diamater >= 150
+	//Deceleration Button 2: diamater <= 130
+	if(sphereDiameter >= 150){
+		SetBtn(TRUE, iInterface, 1);
+		SetBtn(FALSE, iInterface, 2);
+	}
+	else if (sphereDiameter <= 130) {
+		SetBtn(TRUE, iInterface, 2);
+		SetBtn(FALSE, iInterface, 1);
+	}
+	else {
+		
+	}
+
+	
