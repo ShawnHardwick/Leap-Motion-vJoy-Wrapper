@@ -26,6 +26,12 @@
 *All rights remane to vJoystick; if the have any.                              *
 \******************************************************************************/
 
+#ifdef linux
+#include <unistd.h>
+#else
+#include <windows.h>
+#endif
+
 #include <iostream>
 #include "stdafx.h"
 #include "public.h"
@@ -48,7 +54,6 @@ _tmain(__in int argc, __in PZPWSTR argv){
   controller.addListener(listener);
   controller.setPolicyFlags(Controller::PolicyFlag::POLICY_BACKGROUND_FRAMES); //Allows background frame tracking when application is out of focus
 
-	USHORT X;										//Position of Axis
 	JOYSTICK_POSITION	iReport;					// The structure that holds the full position data
 	BYTE id=1;										// ID of the target vjoy device (Default is 1)
 	UINT iInterface=1;								// Default target vJoy device
@@ -65,6 +70,7 @@ _tmain(__in int argc, __in PZPWSTR argv){
 	if (!vJoyEnabled())
 	{
 		_tprintf("vJoy driver not enabled: Failed Getting vJoy attributes.\n");
+		std::cin.get();
 		return -2;
 	}
 
@@ -80,12 +86,15 @@ _tmain(__in int argc, __in PZPWSTR argv){
 		break;
 	case VJD_STAT_BUSY:
 		_tprintf("vJoy Device %d is already owned by another feeder\nCannot continue\n", iInterface);
+		std::cin.get();
 		return -3;
 	case VJD_STAT_MISS:
 		_tprintf("vJoy Device %d is not installed or disabled\nCannot continue\n", iInterface);
+		std::cin.get();
 		return -4;
 	default:
 		_tprintf("vJoy Device %d general error\nCannot continue\n", iInterface);
+		std::cin.get();
 		return -1;
 	};
 
@@ -94,6 +103,7 @@ _tmain(__in int argc, __in PZPWSTR argv){
 	if ((status == VJD_STAT_OWN) || ((status == VJD_STAT_FREE) && (!AcquireVJD(iInterface))))
 	{
 		_tprintf("Failed to acquire vJoy device number %d.\n", iInterface);
+		std::cin.get();
 		return -1;
 	}
 	else
@@ -101,22 +111,30 @@ _tmain(__in int argc, __in PZPWSTR argv){
 		_tprintf("Acquired: vJoy device number %d.\n", iInterface);
 	}
 
+	//Check if LeapMotion device is plugged in, give a second for the controller to connect before checking again
+	if(!(controller.isConnected())){
+		#ifdef linux
+		usleep(1000000);
+		#else
+		Sleep( 1000 );
+		#endif
+		if(!(controller.isConnected())){
+			printf("Leap Motion device  is not connected to the Leap Motion service \nor the Leap Motion hardware is not plugged in.\n");
+			std::cin.get();
+			return(-10);
+		}
+	}
 	long value = 0;
 	BOOL res = FALSE;
 
   //// Keep this process running until Enter is pressed
   //std::cout << "Press Enter to quit..." << std::endl;
   //std::cin.get();
-	X = 0;
+
   // Reset this device to default values
 	ResetVJD(iInterface);
 	while(1)
 	{
-		//create the data packet that holds all the information
-		id = (BYTE)iInterface;
-		iReport.bDevice = id;
-		iReport.wAxisX=X;
-
 		const Frame frame = controller.frame();
 		const Frame prevFrame = controller.frame(1);
 		if (!frame.hands().isEmpty()) {
@@ -125,9 +143,9 @@ _tmain(__in int argc, __in PZPWSTR argv){
 			if (!fingers.isEmpty()) {
 
 				//SetBtn(TRUE, iInterface, fingers.count());
+
 			}
 			float rotation = hand.palmNormal().roll();
-	
 			int axisValue;
 			if(rotation > 0){
 				axisValue = 35900 - (rotation * 19516 + 16384);
@@ -138,37 +156,12 @@ _tmain(__in int argc, __in PZPWSTR argv){
 			else{ //Hand is center
 				axisValue = 16384;
 			}
-			
-			// Sets the X Axis
-			//SetAxis(axisValue, iInterface, HID_USAGE_X);
-			iReport.wAxisX = axisValue;
 
-			//Count the amount of fingers in FingerList to set button
-			//2 or more fingers, Accelerate
-			int howmanyfingers = fingers.count();
-
-			if(howmanyfingers >= 2) {
-				//SetBtn(TRUE, iInterface, 1);
-				//SetBtn(FALSE, iInterface, 2);
-				iReport.lButtons = 1;
-			}
-			//1 or less fingers, Decelerate
-			else if (howmanyfingers <= 1) {
-				//SetBtn(TRUE, iInterface, 2);
-				//SetBtn(FALSE, iInterface, 1);
-				iReport.lButtons = 2;
-			}
-			
+			SetAxis(axisValue, iInterface, HID_USAGE_X);
 		}
 		else{
-			//SetAxis(16384, iInterface, HID_USAGE_X); //Set axis to neutral if no hand is detected
-			//SetBtn(FALSE, iInterface, 1); //Set buttons to false if no hand is detected
-			//SetBtn(FALSE, iInterface, 2); //Set buttons to false if no hand is detected
-			iReport.lButtons = 0;
-			iReport.wAxisX = 16384;
-		} 
-
-		UpdateVJD(iInterface, (PVOID)&iReport); //updates with iReport
+			SetAxis(16384, iInterface, HID_USAGE_X); //Set axis to neutral if no hand is detected
+		}
 
 	}
 

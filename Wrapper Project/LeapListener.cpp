@@ -2,11 +2,11 @@
 #include "LeapListener.h"
 
 void SampleListener::onInit(const Controller& controller) {
-  std::cout << "Initialized" << std::endl;
+  std::cout << "Leap Motion Initialized" << std::endl;
 }
 
 void SampleListener::onConnect(const Controller& controller) {
-  std::cout << "Connected" << std::endl;
+  std::cout << "Leap Motion Connected" << std::endl;
   controller.enableGesture(Gesture::TYPE_CIRCLE);
   controller.enableGesture(Gesture::TYPE_KEY_TAP);
   controller.enableGesture(Gesture::TYPE_SCREEN_TAP);
@@ -15,11 +15,11 @@ void SampleListener::onConnect(const Controller& controller) {
 
 void SampleListener::onDisconnect(const Controller& controller) {
   //Note: not dispatched when running in a debugger.
-  std::cout << "Disconnected" << std::endl;
+  std::cout << "Leap Motion Disconnected" << std::endl;
 }
 
 void SampleListener::onExit(const Controller& controller) {
-  std::cout << "Exited" << std::endl;
+  std::cout << "Leap Motion Exited" << std::endl;
 }
 
 void SampleListener::onFrame(const Controller& controller) {
